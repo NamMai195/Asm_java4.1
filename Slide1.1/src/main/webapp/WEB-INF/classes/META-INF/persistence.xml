@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    
+    <persistence-unit name="PolyOE">
+        <properties>
+            <!-- Đúng tên của driver JDBC cho SQL Server -->
+            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+            <!-- URL kết nối JDBC -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=PolyOE" />
+            <!-- Tên và mật khẩu người dùng cho SQL Server -->
+            <property name="javax.persistence.jdbc.user" value="sa" />
+            <property name="javax.persistence.jdbc.password" value="Nam@19052005" />
+            
+            <!-- Hiển thị câu lệnh SQL và format cho dễ đọc -->
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            
+            <!-- Dialect Hibernate cho SQL Server -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+        </properties>
+    </persistence-unit>
+</persistence>
