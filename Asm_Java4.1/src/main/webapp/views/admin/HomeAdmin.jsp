@@ -50,7 +50,7 @@
 			<section class="content">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">Repost Videos</h3>
+						<h3 class="card-title">Repost Videos AND User</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -74,6 +74,7 @@
 
 									</tr>
 								</c:forEach>
+
 							</tbody>
 							<tfoot>
 								<tr>
@@ -132,6 +133,7 @@
 					<!-- /.card-body -->
 				</div>
 			</section>
+
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
