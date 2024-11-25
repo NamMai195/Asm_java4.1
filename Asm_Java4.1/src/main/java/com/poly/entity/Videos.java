@@ -1,9 +1,11 @@
 package com.poly.entity;
 
 import javax.persistence.*;
-import lombok.Data;
+
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Entity
