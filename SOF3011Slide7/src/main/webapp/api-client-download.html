@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="/SOF3011Slide7/files/KQKD-Q224.png" download="KQKD-Q224.png">Download</a>
+	<hr>
+<button onclick="download()">Download</button>
+<script>
+function download(){
+	var url = "http://localhost:8080/SOF3011Slide7/ajax/fetch/download";
+	fetch(url).then(resp => resp.blob()).then(blob => {
+		// Tạo URL từ đối tượng blob
+		var blobUrl = URL.createObjectURL(blob);
+		saveAs(blobUrl, "data.txt"); // lưu xuống file data.txt
+		// Xóa URL đã tạo ở trên
+		URL.revokeObjectURL(blobUrl);
+	})
+}
+function saveAs(url, filename) {
+	var a = document.createElement("a"); // Tạo <a></a>
+	 a.href = url; // <a href=@url></a>
+	 a.download = filename; // <a href=@url download=@filename>
+	 document.body.appendChild(a); // bổ sung <a> vào <body>
+	 a.click(); // phát sinh sự kiện click vào <a>
+	 document.body.removeChild(a); // Xóa <a> khỏi <body>
+}
+</script>
+</body>
+</html>

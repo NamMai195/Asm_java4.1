@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<button onclick="proxy.doGet()">Get</button>
+	<button onclick="proxy.doPost()">Post</button>
+	<button onclick="proxy.doPut()">Put</button>
+	<button onclick="proxy.doDelete()">Delete</button>
+	<script>
+	var proxy = {
+			doGet(){
+				var options = {
+						url: "http://localhost:8080/SOF3011Slide7/api",
+						type:"GET"
+				};
+				$.ajax(options).then(resp => {
+					console.log(resp);
+				}).catch(error => {
+					console.log(error);
+				})
+			},
+			doPost(){
+				var options = {
+						url: "http://localhost:8080/SOF3011Slide7/api",
+						type:"POST",
+						contentType: "application/json",
+						data: JSON.stringify({name:"Le Van Teo"})
+				};
+				$.ajax(options).then(resp => {
+					console.log(resp);
+				}).catch(error => {
+					console.log(error);
+				})
+			},
+			doPut(){
+				var options = {
+						url: "http://localhost:8080/SOF3011Slide7/api/2024",
+						type:"PUT",
+						contentType: "application/json",
+						data: JSON.stringify({name:"Le Van Teo"})
+				};
+				$.ajax(options).then(resp => {
+					console.log(resp);
+				}).catch(error => {
+					console.log(error);
+				})
+			},
+			doDelete(){
+				var options = {
+						url: "http://localhost:8080/SOF3011Slide7/api/2024",
+						type:"DELETE"
+				};
+				$.ajax(options).then(resp => {
+					console.log(resp);
+				}).catch(error => {
+					console.log(error);
+				})
+			}
+	}
+		
+	</script>
+</body>
+</html>

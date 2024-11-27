@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Insert title here</title>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<button onclick="proxy.doGet()">Get</button>
+	<button onclick="proxy.doPost()">Post</button>
+	<button onclick="proxy.doPut()">Put</button>
+	<button onclick="proxy.doDelete()">Delete</button>
+	<script>
+	var proxy = {
+			doGet(){
+				var url = "http://localhost:8080/SOF3011Slide7/api";
+				axios.get(url).then(resp => {
+					console.log(resp.data);
+				}).catch(error => {
+					console.log(error);
+				})
+			},
+			doPost(){
+				var url = "http://localhost:8080/SOF3011Slide7/api";
+				var data = {name:"Le Van Teo"}
+				axios.post(url, data).then(resp => {
+					console.log(resp.data);
+				}).catch(error => {
+					console.log(error);
+				})
+			},
+			doPut(){
+				var url = "http://localhost:8080/SOF3011Slide7/api/2024";
+				var data = {name:"Le Van Teo"}
+				axios.put(url, data).then(resp => {
+					console.log(resp.data);
+				}).catch(error => {
+					console.log(error);
+				})
+			},
+			doDelete(){
+				var url = "http://localhost:8080/SOF3011Slide7/api/2024";
+				axios.delete(url).then(resp => {
+					console.log(resp.data);
+				}).catch(error => {
+					console.log(error);
+				})
+			}
+	}
+		
+	</script>
+</body>
+</html>
