@@ -20,4 +20,28 @@ public class StatsServiceImpl implements StatsService {
 		return statsdao.findVideoLikedInfo();
 	}
 
+	@Override
+	public Integer getTotalVideos() {
+		// TODO Auto-generated method stub
+		return statsdao.getTotalVideos();
+	}
+
+	@Override
+	public Integer getToTalUsers() {
+		// TODO Auto-generated method stub
+		return statsdao.getToTalUsers();
+	}
+
+	@Override
+	public Integer getToTalViews() {
+		// TODO Auto-generated method stub
+		return statsdao.getToTalViews();
+	}
+
+	@Override
+	public Integer getToTalShare() {
+		// TODO Auto-generated method stub
+		return statsdao.getToTalShare();
+	}
+
 }

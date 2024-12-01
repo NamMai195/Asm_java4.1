@@ -35,5 +35,26 @@
     </div>
     <%@ include file="/common/footer.jsp"%> 
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <c:if test="${param.confirmSuccess == 'true'}">
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Xác nhận thành công!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    </script>
+  </c:if>
+  <c:if test="${param.confirmSuccess == 'false'}">
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Xác nhận thất bại!',
+        text: 'Mã xác nhận không đúng.'
+      });
+    </script>
+  </c:if>
 </body>
 </html>

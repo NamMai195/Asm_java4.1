@@ -71,15 +71,9 @@ public class confirmEmail extends HttpServlet {
 					response.sendRedirect("index");
 				}
 
-			} else {
-				// Token không hợp lệ
-				response.setContentType("text/html;charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('Token không hợp lệ. Vui lòng kiểm tra lại email.');");
-				out.println("history.back();"); // Quay lại trang trước đó
-				out.println("</script>");
-			}
+			}  else {
+	            response.sendRedirect(request.getContextPath() + "/confirmEmail?confirmSuccess=false");
+	        }
 		} else {
 			// Token hoặc session không hợp lệ
 			response.setContentType("text/html;charset=UTF-8");

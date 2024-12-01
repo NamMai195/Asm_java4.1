@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
 import com.poly.dao.VideoDao;
 import com.poly.dao.impl.VideoDaoImpl;
 import com.poly.entity.Videos;
 import com.poly.service.VideoService;
+import com.poly.util.JpaUtil;
 
 public class VideoServiceImpl implements VideoService {
     private VideoDao videoDao = new VideoDaoImpl(); // Khởi tạo DAO
@@ -47,8 +51,8 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Videos delete(String href) {
     	Videos entity=findByHref(href);
-    	
-        return videoDao.delete(entity);
+    	entity.setIsActive(Boolean.FALSE);
+        return videoDao.update(entity);
     }
 
 	@Override
@@ -69,4 +73,14 @@ public class VideoServiceImpl implements VideoService {
 	                    .filter(video -> video.getHref() != null && !video.getHref().equals(href))
 	                    .collect(Collectors.toList());
 	}
+
+	@Override
+	public List<Videos> searchByKeyword(String keyword) {
+	    String jpql = "SELECT v FROM Videos v WHERE v.title LIKE :keyword OR v.description LIKE :keyword";
+	    EntityManager em = JpaUtil.getEntityManager();
+	    TypedQuery<Videos> query = em.createQuery(jpql, Videos.class);
+	    query.setParameter("keyword", "%" + keyword + "%"); // Sử dụng named parameter
+	    return query.getResultList();
+	}
+	
 }

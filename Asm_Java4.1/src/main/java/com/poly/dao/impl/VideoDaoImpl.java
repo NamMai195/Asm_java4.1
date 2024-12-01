@@ -33,6 +33,10 @@ public class VideoDaoImpl extends AbstractDao<Videos> implements VideoDao {
 
 	}
 
-	
+	 @Override
+	    public List<Videos> searchByKeyword(String keyword) {
+	        String jpql = "SELECT v FROM Videos v WHERE v.title LIKE :keyword OR v.description LIKE :keyword";
+	        return super.findManyByJpql(jpql, "%" + keyword + "%"); 
+	    }
 
 }

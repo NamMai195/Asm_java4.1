@@ -12,6 +12,8 @@ public interface HistoryService {
 	List<History> findByUserAndIsliked(String username);
 
 	History findByUserIdAndVideoId(String userId, String videoId);
+	
+	Integer findByVideoIdAndIsliked(String videoId);
 
 	History create(User user,Videos video);
 

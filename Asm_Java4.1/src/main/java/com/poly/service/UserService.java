@@ -25,4 +25,5 @@ public interface UserService {
 
 	User delete(String username);
 
+	List<User> findUserLikedByHref(String href);
 }

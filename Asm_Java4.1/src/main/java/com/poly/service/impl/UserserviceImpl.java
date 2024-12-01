@@ -1,6 +1,10 @@
 package com.poly.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
 
 import com.poly.dao.HistoryDao;
 import com.poly.dao.UserDao;
@@ -75,15 +79,19 @@ public class UserserviceImpl implements UserService {
 
 	public User delete(String id) {
 		User user = dao.findById(id);
-		HistoryDao his = new HistoryDaoImpl();
-		List<History> list = his.findByUser(id);
-		if (list.size() < 1) {
-			return dao.delete(user);
-		} else {
-			user.setIsActive(Boolean.FALSE);
-			return dao.update(user);
-		}
 
+		user.setIsActive(Boolean.FALSE);
+		return dao.update(user);
+
+	}
+
+	@Override
+	public List<User> findUserLikedByHref(String href) {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap();
+		params.put("videohref", href);
+
+		return dao.findUserLikedVideoByHref(params);
 	}
 
 }

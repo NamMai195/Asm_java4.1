@@ -19,6 +19,6 @@ public interface VideoDao {
 
 	Videos delete(Videos entity);
 	
-	
+	 List<Videos> searchByKeyword(String keyword);
 
 }

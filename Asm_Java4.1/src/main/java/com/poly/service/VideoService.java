@@ -19,4 +19,6 @@ public interface VideoService {
     Videos update(Videos entity);
 
     Videos delete(String  href);
+    
+    List<Videos> searchByKeyword(String keyword);
 }

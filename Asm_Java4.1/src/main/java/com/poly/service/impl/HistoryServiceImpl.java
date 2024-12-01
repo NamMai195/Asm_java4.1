@@ -75,4 +75,10 @@ public class HistoryServiceImpl implements HistoryService {
 		return updateHistory != null ? true : false;
 	}
 
+	@Override
+	public Integer findByVideoIdAndIsliked(String videoId) {
+		// TODO Auto-generated method stub
+		return dao.findByVideoIdAndIsliked(videoId);
+	}
+
 }

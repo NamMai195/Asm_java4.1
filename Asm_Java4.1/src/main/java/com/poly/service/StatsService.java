@@ -6,4 +6,9 @@ import com.poly.dto.VideoLikedInfo;
 
 public interface StatsService {
 	List<VideoLikedInfo> findvideoLikedInfo();
+	
+	Integer getTotalVideos();
+	Integer getToTalUsers();
+	Integer getToTalViews();
+	Integer getToTalShare();
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <header id="header" class="f-header">
 	<nav class="navbar navbar-expand-md fixed-top">
 		<div class="container">
@@ -18,10 +19,10 @@
 
 			<div class="navbar-collapse" id="f-navbar-search">
 				<div class="mr-auto f-navbar-search">
-					<form class="form-inline my-2 my-lg-0">
+					<form class="form-inline my-2 my-lg-0" action="search" method="get"> 
 						<input class="form-control transition" type="text"
 							placeholder="Type to search" aria-label="Search"
-							id="nav-input-search">
+							id="nav-input-search" name="query"> 
 						<button class="btn button-default my-2 my-sm-0" type="submit">
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</button>
@@ -35,10 +36,10 @@
 							class="fa fa-search" aria-hidden="true"></i></a>
 
 						<div class="dropdown-menu" aria-labelledby="dropdown-search">
-							<form class="dropdown-search-mb">
+							<form class="dropdown-search-mb" action="search" method="get"> 
 								<input class="form-control transition" type="text"
 									placeholder="Type to search" aria-label="Search"
-									id="nav-input-search-mb">
+									id="nav-input-search-mb" name="query"> 
 								<button class="btn button-default" type="submit">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
@@ -52,17 +53,17 @@
 							class="badge badge-pill badge-danger">2</span></a>
 						<div class="dropdown-menu f-notification">
 							<h3>Thông Báo</h3>
-							<a class="dropdown-item" href="#">
-								<div class="f-noti-thumn">
-									<img src="images/fuvavi-thumnail.jpg" alt="">
-								</div>
-								<p>Đăng kí nhận thông báo để cập nhật bài viết mới nhất</p>
-							</a> <a class="dropdown-item" href="#">
-								<div class="f-noti-thumn">
-									<img src="images/fuvavi-thumnail.jpg" alt="">
-								</div>
-								<p>Đăng kí nhận thông báo để cập nhật bài viết mới nhất</p>
-							</a>
+							<c:forEach items="${videos}" var="video" begin="0" end="1">
+								<a class="dropdown-item"
+									href="video?action=watch&id=${video.href}">
+									<div class="f-noti-thumn">
+										<img
+											src="https://img.youtube.com/vi/${video.href}/hqdefault.jpg"
+											alt="">
+									</div>
+									<p>Video mới: ${video.title}</p>
+								</a>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="action-nav">
@@ -74,6 +75,15 @@
 							<c:choose>
 								<c:when test="${not empty sessionScope.currentUser}">
 									<h3>Xin chào, ${sessionScope.currentUser.username}!</h3>
+									<c:choose>
+										<c:when test="${sessionScope.currentUser.role}">
+											<a class="dropdown-item"
+												href="${pageContext.request.contextPath}/Homeadmin"> <i
+												class="fa fa-key" aria-hidden="true"
+												style="padding-right: 10px;"></i> Trang Admin
+											</a>
+										</c:when>
+									</c:choose>
 									<a class="dropdown-item"
 										href="${pageContext.request.contextPath}/changepass"> <i
 										class="fa fa-key" aria-hidden="true"
@@ -89,7 +99,6 @@
 										class="fa fa-sign-out" aria-hidden="true"
 										style="padding-right: 10px;"></i> Chỉnh sửa thông tin cá nhân
 									</a>
-
 								</c:when>
 								<c:otherwise>
 									<a class="dropdown-item"

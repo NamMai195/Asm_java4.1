@@ -1,9 +1,12 @@
 package com.poly.dao;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
 import com.poly.util.JpaUtil;
@@ -50,6 +53,18 @@ public class AbstractDao<T> {
 			TypedQuery<T> query = entityManager.createQuery(sql.toString(), clazz);
 			query.setFirstResult((pageNumber - 1) * pageSize);
 			query.setMaxResults(pageSize);
+			return query.getResultList();
+		} finally {
+			entityManager.close();
+		}
+	}
+	public List<T> findAll(Class<T> clazz) {
+		EntityManager entityManager = JpaUtil.getEntityManager();
+		try {
+			String entityName = clazz.getSimpleName();
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT o FROM ").append(entityName).append(" o");
+			TypedQuery<T> query = entityManager.createQuery(sql.toString(), clazz);
 			return query.getResultList();
 		} finally {
 			entityManager.close();
@@ -167,4 +182,49 @@ public class AbstractDao<T> {
 			entityManager.close();
 		}
 	}
+	public List<T> callStores(String nameStore, Map<String, Object> params) {
+	    try {
+	        EntityManager entityManager = JpaUtil.getEntityManager();
+	        StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery(nameStore);
+	        params.forEach((key, value) -> query.setParameter(key, value));
+	        return (List<T>) query.getResultList(); // Cần kiểm tra kiểu dữ liệu trả về
+	    } catch (Exception e) {
+	        System.out.println("Error calling stored procedure: {}"+ nameStore+ e);
+	        // ... xử lý lỗi, ví dụ: trả về danh sách rỗng
+	        return Collections.emptyList(); 
+	    } finally {
+	        // Đóng EntityManager (nếu cần)
+	    }
+	}
+	 public T findOneByJpql(String jpql, Object... params) {
+	        EntityManager em = JpaUtil.getEntityManager();
+	        try {
+	            TypedQuery<T> query = em.createQuery(jpql, (Class<T>) Object.class);
+	            for (int i = 0; i < params.length; i++) {
+	                query.setParameter(i + 1, params[i]);
+	            }
+	            List<T> result = query.getResultList();
+	            if (result.isEmpty()) {
+	                return null;
+	            }
+	            return result.get(0);
+	        } finally {
+	            em.close();
+	        }
+	    }
+	 public List<T> findManyByJpql(String jpql, Object... params) {
+		    EntityManager em = JpaUtil.getEntityManager();
+		    try {
+		        TypedQuery<T> query = em.createQuery(jpql, (Class<T>) Object.class); 
+		        if (params != null && params.length > 0) { // Kiểm tra nếu có tham số
+		            for (int i = 0; i < params.length; i++) {
+		                query.setParameter(i + 1, params[i]);
+		            }
+		        }
+		        return query.getResultList();
+		    } finally {
+		        em.close();
+		    }
+		}
+	 
 }

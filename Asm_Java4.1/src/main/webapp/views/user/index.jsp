@@ -27,10 +27,10 @@
 	height: 100%; /* Tương ứng với chiều cao tính từ padding-top */
 	border: none;
 }
-a {
-    text-decoration: none !important;
-}
 
+a {
+	text-decoration: none !important;
+}
 </style>
 <body>
 	<div class="wrapper">
@@ -42,68 +42,41 @@ a {
 					<%@ include file="/common/sidebar.jsp"%>
 					<div class="col-12 col-md-9 col-xl-9 fvv-content">
 						<div class="fvv-content-box">
-							<h2 class="fvv-content-title">Tin Mới</h2>
+							<h2 class="fvv-content-title">Video Mới</h2>
 							<div class="fvv-content-body">
 								<div id="new-post-slide"
 									class="owl-carousel new-post-slide slide-style">
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
+									<c:forEach items="${lastVideos}" var="video">
+										<div class="item">
+											<div class="new-post-item">
+												<div class="new-post-item-inner">
+													<a href="video?action=watch&id=${video.href}">
+														<div class="post-avatar">
+															<iframe src="https://www.youtube.com/embed/${video.href}"
+																title="YouTube video player" frameborder="0"
+																allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+																referrerpolicy="strict-origin-when-cross-origin"
+																allowfullscreen> </iframe>
+														</div>
+														<div class="post-content">
+															<h3 class="text-white">${video.title}</h3>
+															<p class="text-gray text-truncate">${video.description}
+																|| Views: ${video.views}</p>
+														</div>
+													</a>
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 						<div class="fvv-content-box">
-							<h2 class="fvv-content-title">Thiết kế web</h2>
+							<h2 class="fvv-content-title">Video</h2>
 							<div class="fvv-content-body">
 								<div class="row">
 									<c:forEach items="${videos}" var="video" varStatus="loop">
-									    <c:if test="${loop.index < 6}">
-										<div class="col-md-4 col-sm-6"> 
+										<div class="col-md-4 col-sm-6">
 											<div class="cate-post-item">
 												<div class="cate-post-item-inner">
 													<a href="video?action=watch&id=${video.href}">
@@ -116,16 +89,36 @@ a {
 														</div>
 														<div class="post-content">
 															<h5 class="text-default">${video.title}</h5>
-															<p class="text-gray text-truncate">${video.description}|| Views:
-																${video.views}</p>
+															<p class="text-gray text-truncate">${video.description}||
+																Views: ${video.views}</p>
 														</div>
 													</a>
 												</div>
 											</div>
 										</div>
-										</c:if>
 									</c:forEach>
 								</div>
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<c:if test="${currentPage > 1}">
+											<li class="page-item"><a class="page-link"
+												href="index?page=${currentPage - 1}" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+											</a></li>
+										</c:if>
+										<c:forEach begin="1" end="${totalPages}" var="i">
+											<li class="page-item ${currentPage == i ? 'active' : ''}">
+												<a class="page-link" href="index?page=${i}">${i}</a>
+											</li>
+										</c:forEach>
+										<c:if test="${currentPage < totalPages}">
+											<li class="page-item"><a class="page-link"
+												href="index?page=${currentPage + 1}" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+											</a></li>
+										</c:if>
+									</ul>
+								</nav>
 							</div>
 						</div>
 
@@ -138,6 +131,32 @@ a {
 			</div>
 		</div>
 		<%@ include file="/common/linksctrip.jsp"%>
+
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+		<c:if test="${not empty sessionScope.showLoginSuccess}">
+			<script>
+				Swal.fire({
+					icon : 'success',
+					title : 'Đăng nhập thành công!',
+					showConfirmButton : false,
+					timer : 1500
+				});
+			</script>
+			<c:remove var="showLoginSuccess" scope="session" />
+		</c:if>
+
+		<c:if test="${not empty sessionScope.showLogoutSuccess}">
+			<script>
+				Swal.fire({
+					icon : 'success',
+					title : 'Đăng xuất thành công!',
+					showConfirmButton : false,
+					timer : 1500
+				});
+			</script>
+			<c:remove var="showLogoutSuccess" scope="session" />
+		</c:if>
 	</div>
 </body>
 </html>

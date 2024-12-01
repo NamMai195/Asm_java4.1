@@ -1,7 +1,9 @@
 package com.poly.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
+import com.poly.constant.NamedStored;
 import com.poly.dao.AbstractDao;
 import com.poly.dao.UserDao;
 import com.poly.entity.User;
@@ -41,6 +43,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 	public List<User> findAll(int pageNumber, int pageSide) {
 		return super.findAll(User.class, true, pageNumber, pageSide);
 		
+	}
+
+	@Override
+	public List<User> findUserLikedVideoByHref(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return super.callStores(NamedStored.FIND_USER_LIKED_BYHREF, params);
 	}
 	
 

@@ -27,10 +27,10 @@
 	height: 100%; /* Tương ứng với chiều cao tính từ padding-top */
 	border: none;
 }
-a {
-    text-decoration: none !important;
-}
 
+a {
+	text-decoration: none !important;
+}
 </style>
 <body>
 	<div class="wrapper">
@@ -42,87 +42,32 @@ a {
 					<%@ include file="/common/sidebar.jsp"%>
 					<div class="col-12 col-md-9 col-xl-9 fvv-content">
 						<div class="fvv-content-box">
-							<h2 class="fvv-content-title">Tin Mới</h2>
-							<div class="fvv-content-body">
-								<div id="new-post-slide"
-									class="owl-carousel new-post-slide slide-style">
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="fvv-content-box">
-							<h2 class="fvv-content-title">Thiết kế web</h2>
+							<h2 class="fvv-content-title">Video Đã Xem</h2>
 							<div class="fvv-content-body">
 								<div class="row">
 									<c:forEach items="${videos}" var="video" varStatus="loop">
-									    <c:if test="${loop.index < 6}">
-										<div class="col-md-4 col-sm-6"> 
-											<div class="cate-post-item">
-												<div class="cate-post-item-inner">
-													<a href="video?action=watch&id=${video.href}">
-														<div class="post-avatar">
-															<iframe src="https://www.youtube.com/embed/${video.href}"
-																title="YouTube video player" frameborder="0"
-																allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-																referrerpolicy="strict-origin-when-cross-origin"
-																allowfullscreen> </iframe>
-														</div>
-														<div class="post-content">
-															<h5 class="text-default">${video.title}</h5>
-															<p class="text-gray text-truncate">${video.description}|| Views:
-																${video.views}</p>
-														</div>
-													</a>
+										<c:if test="${loop.index < 6}">
+											<div class="col-md-4 col-sm-6">
+												<div class="cate-post-item">
+													<div class="cate-post-item-inner">
+														<a href="video?action=watch&id=${video.href}">
+															<div class="post-avatar">
+																<iframe
+																	src="https://www.youtube.com/embed/${video.href}"
+																	title="YouTube video player" frameborder="0"
+																	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+																	referrerpolicy="strict-origin-when-cross-origin"
+																	allowfullscreen> </iframe>
+															</div>
+															<div class="post-content">
+																<h5 class="text-default">${video.title}</h5>
+																<p class="text-gray text-truncate">${video.description}||
+																	Views: ${video.views}</p>
+															</div>
+														</a>
+													</div>
 												</div>
 											</div>
-										</div>
 										</c:if>
 									</c:forEach>
 								</div>

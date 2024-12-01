@@ -4,6 +4,7 @@ import javax.security.auth.Subject;
 import javax.servlet.ServletContext;
 
 import com.poly.entity.User;
+import com.poly.entity.Videos;
 import com.poly.service.EmailService;
 import com.poly.util.EmailUtil;
 import com.poly.util.TokenGenerator;
@@ -58,6 +59,29 @@ public class EmailServiceImpl implements EmailService {
 		
 
 	}
+	 @Override
+	    public void sendShareVideoEmail(ServletContext context, String recipientEmail, Videos video) {
+	        String host = context.getInitParameter("host");
+	        String port = context.getInitParameter("port");
+	        String user = context.getInitParameter("user");
+	        String pass = context.getInitParameter("pass");
+
+	        try {
+	            String subject = "Chia sẻ video từ Online Entertainment";
+	            String content = "Dear " + recipientEmail + ",\n\n"
+	                    + "Bạn được chia sẻ video:\n\n"
+	                    + video.getTitle() + "\n\n"
+	                    + "Xem video tại đây:\n\n"
+	                    + "https://www.youtube.com/watch/" + video.getHref() + "\n\n" 
+	                    + "Trân trọng,\n"
+	                    + "Your Website";
+
+	            EmailUtil.sendEmail(host, port, user, pass, recipientEmail, subject, content);
+	        } catch (Exception e) {
+	            System.err.println("Lỗi khi gửi email chia sẻ video: " + e.getMessage());
+	            e.printStackTrace();
+	        }
+	    }
 	@Override
 	public void sendMail(ServletContext context, User recipient, String type, String newEmail, String token) {
 	    // ... (Lấy thông tin host, port, user, pass từ context)

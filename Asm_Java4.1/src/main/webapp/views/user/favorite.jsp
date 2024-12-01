@@ -42,63 +42,7 @@ a {
 					<%@ include file="/common/sidebar.jsp"%>
 					<div class="col-12 col-md-9 col-xl-9 fvv-content">
 						<div class="fvv-content-box">
-							<h2 class="fvv-content-title">Tin Mới</h2>
-							<div class="fvv-content-body">
-								<div id="new-post-slide"
-									class="owl-carousel new-post-slide slide-style">
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="new-post-item">
-											<div class="new-post-item-inner">
-												<a href="/">
-													<div class="post-avatar">
-														<img src="images/iphonex.jpg" alt="iphone x">
-													</div>
-													<div class="post-content">
-														<h3 class="text-white">Cận cảnh iPhone X: "Vũ khí" bí
-															mật của Apple.</h3>
-														<p class="text-white">Công nghệ | 2 giờ trước</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="fvv-content-box">
-							<h2 class="fvv-content-title">Thiết kế web</h2>
+							<h2 class="fvv-content-title">Video Đã Thích</h2>
 							<div class="fvv-content-body">
 								<div class="row">
 									<c:forEach items="${videos}" var="video" varStatus="loop">

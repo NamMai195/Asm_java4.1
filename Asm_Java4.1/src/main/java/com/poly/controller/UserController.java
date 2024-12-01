@@ -1,6 +1,7 @@
 package com.poly.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,8 +15,10 @@ import javax.servlet.http.HttpSession;
 
 import com.poly.constant.SessionAttr;
 import com.poly.entity.User;
+import com.poly.entity.Videos;
 import com.poly.service.EmailService;
 import com.poly.service.UserService;
+import com.poly.service.VideoService;
 import com.poly.service.impl.EmailServiceImpl;
 import com.poly.service.impl.UserserviceImpl;
 
@@ -110,6 +113,7 @@ public class UserController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.removeAttribute(SessionAttr.CURRENT_USER);
+		session.setAttribute("showLogoutSuccess", true); // Đặt biến session cho đăng xuất thành công
 		response.sendRedirect("index");
 	}
 
@@ -150,13 +154,12 @@ public class UserController extends HttpServlet {
 		String password = request.getParameter("password");
 		User user = userservice.login(username, password);
 		if (user != null) {
-
 			session.setAttribute("currentUser", user);
+			session.setAttribute("showLoginSuccess", true); // Đặt biến session
 			response.sendRedirect("index");
-
 		} else {
-			System.out.println("Thất Bại");
-			response.sendRedirect("login");
+			// Đăng nhập thất bại, chuyển hướng về trang login với tham số error
+			response.sendRedirect(request.getContextPath() + "/login?error=invalid");
 		}
 	}
 
@@ -262,8 +265,7 @@ public class UserController extends HttpServlet {
 			// Xử lý thay đổi fullname (nếu có)
 			currentUser.setUsername(newFullName);
 			userservice.update(currentUser);
-			session.removeAttribute(SessionAttr.CURRENT_USER);
-			response.sendRedirect("index");
+			response.sendRedirect(request.getContextPath() + "/edituser?updateSuccess=true");
 		} else {
 			// Không có thay đổi nào được thực hiện
 			// ... (Thêm xử lý, ví dụ: hiển thị thông báo hoặc chuyển hướng)

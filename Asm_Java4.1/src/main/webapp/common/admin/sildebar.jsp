@@ -19,7 +19,7 @@
 					class="img-circle elevation-2" alt="User Image">
 			</div>
 			<div class="info">
-				<a href="#" class="d-block">Alexander Pierce</a>
+				<a href="${pageContext.request.contextPath}" class="d-block">${sessionScope.currentUser.username}</a>
 			</div>
 		</div>
 
@@ -32,65 +32,59 @@
 				data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-				<li class="nav-item"><a href="./index.html"
-					class="nav-link active"> <i class="fas fa-list nav-icon"></i>
+				<li class="nav-item"><a
+					href="${pageContext.request.contextPath}/Homeadmin"
+					class="nav-link "> <i class="fas fa-list nav-icon"></i>
 						<p>Home Admin</p>
 				</a></li>
-				<li class="nav-item"><a href="#" class="nav-link active"> <i
+				<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-video"></i>
 						<p>
 							Video Management <i class="right fas fa-angle-left"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="./index.html"
-							class="nav-link active"> <i class="fas fa-list nav-icon"></i>
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/admin/video?action=view"
+							class="nav-link "> <i class="fas fa-list nav-icon"></i>
 								<p>All Videos</p>
 						</a></li>
-						<li class="nav-item"><a href="./index2.html" class="nav-link">
-								<i class="fas fa-sliders-h nav-icon"></i>
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/admin/video?action=list"
+							class="nav-link"> <i class="fas fa-sliders-h nav-icon"></i>
 								<p>Control Videos</p>
 						</a></li>
-						<li class="nav-item"><a href="./index3.html" class="nav-link">
-								<i class="far fa-chart-bar nav-icon"></i>
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/Homeadmin/repostvideo"
+							class="nav-link"> <i class="far fa-chart-bar nav-icon"></i>
 								<p>Report Videos</p>
+						</a></li>
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/Homeadmin/repostshare"
+							class="nav-link"> <i class="fas fa-share-alt nav-icon"></i>
+								<p>Report Shares</p>
 						</a></li>
 					</ul></li>
 
-				<li class="nav-item menu-open"><a href="#"
-					class="nav-link active"> <i class="nav-icon fas fa-users"></i>
+				<li class="nav-item menu-open"><a href="#" class="nav-link ">
+						<i class="nav-icon fas fa-users"></i>
 						<p>
 							Users Management <i class="right fas fa-angle-left"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="./index.html"
-							class="nav-link active"> <i class="fas fa-user-cog nav-icon"></i>
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/admin/user?action=list"
+							class="nav-link "> <i class="fas fa-user-cog nav-icon"></i>
 								<p>Control Users</p>
 						</a></li>
-						<li class="nav-item"><a href="./index3.html" class="nav-link">
-								<i class="far fa-chart-bar nav-icon"></i>
+						<li class="nav-item"><a
+							href="${pageContext.request.contextPath}/Homeadmin/repostuser"
+							class="nav-link"> <i class="far fa-chart-bar nav-icon"></i>
 								<p>Report Users</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item menu-open"><a href="#"
-					class="nav-link active"> <i class="nav-icon fas fa-chart-pie"></i>
-						<!-- Icon thay đổi -->
-						<p>
-							Website Statistics <i class="right fas fa-angle-left"></i>
-						</p>
-				</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="./index.html"
-							class="nav-link active"> <i class="fas fa-video nav-icon"></i>
-								<!-- Icon thay đổi -->
-								<p>Videos Statistics</p>
-						</a></li>
-						<li class="nav-item"><a href="./index.html" class="nav-link">
-								<i class="fas fa-user nav-icon"></i> <!-- Icon thay đổi -->
-								<p>Users Statistics</p>
-						</a></li>
-					</ul></li>
+
 
 
 

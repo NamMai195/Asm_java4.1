@@ -5,32 +5,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 1 
   <title>Đổi mật khẩu</title>
   <%@ include file="/common/taglist.jsp"%>
   <%@ include file="/common/head.jsp"%>
   <style>
-    /* CSS để tạo giao diện giống với hình ảnh */
-    .form-container {
-      border: 1px solid #ddd; /* Viền xám nhạt */
-      padding: 20px;
-    }
-
-    .form-container h1 {
-      color: #333; /* Màu xám đậm */
-      padding: 10px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      font-weight: bold;
-    }
-
-    .btn-primary {
-      background-color: #007bff; /* Màu xanh dương mặc định của Bootstrap */
-      border-color: #007bff;
-    }
+    /* ... (CSS) ... */
   </style>
 </head>
 <body>
@@ -47,7 +27,7 @@
               <div class="fvv-content-body">
                 <div class="form-container">
                   <h1>CHANGE PASSWORD</h1>
-                  <form action="changepass" method="post" onsubmit="return validatePassword()">
+                  <form action="changepass" method="post"> 
                     <div class="form-group">
                       <label for="oldPassword">Mật khẩu cũ:</label>
                       <input type="password" class="form-control" id="oldPassword" name="oldPassword" required>
@@ -73,16 +53,35 @@
     <%@ include file="/common/linksctrip.jsp"%>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-    function validatePassword() {
-      var newPassword = document.getElementById("newPassword").value;
-      var confirmPassword = document.getElementById("confirmPassword").value;
-      if (newPassword !== confirmPassword) {
-        alert("Mật khẩu mới và xác nhận mật khẩu không khớp!");
-        return false; 
-      }
-      return true; 
-    }
+    $(document).ready(function() {
+      $('form').submit(function(event) {
+        var newPassword = $('#newPassword').val();
+        var confirmPassword = $('#confirmPassword').val();
+        if (newPassword !== confirmPassword) {
+          event.preventDefault();
+          Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: 'Mật khẩu mới và xác nhận mật khẩu không khớp!'
+          });
+        } else {
+          // Hiển thị thông báo SweetAlert2 khi mật khẩu khớp
+          event.preventDefault(); // Ngăn form submit mặc định
+          Swal.fire({
+            icon: 'success',
+            title: 'Đổi mật khẩu thành công!',
+            text: 'Đang chuyển hướng đến trang xác nhận...',
+            showConfirmButton: false,
+            timer: 1500 // Đóng sau 1.5 giây
+          }).then(function() {
+            // Submit form sau khi SweetAlert2 đóng
+            $(event.target).unbind('submit').submit(); 
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>

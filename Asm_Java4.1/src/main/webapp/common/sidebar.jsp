@@ -9,7 +9,7 @@
 			<h3>Thể Loại</h3>
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/index"> <i
-						class="fa fa-desktop" aria-hidden="true"></i> Hài Kịch
+						class="fa fa-desktop" aria-hidden="true"></i> Tất Cả
 				</a></li>
 			</ul>
 		</div>

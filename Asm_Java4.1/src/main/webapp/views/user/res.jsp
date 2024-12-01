@@ -12,8 +12,8 @@
 <%@ include file="/common/head.jsp"%>
 <style>
   .form-container {
-    width: 50%; /* Điều chỉnh độ rộng của form */
-    margin: 0 auto; /* Căn giữa form */
+    width: 50%; 
+    margin: 0 auto; 
   }
 </style>
 </head>
@@ -53,8 +53,6 @@
                                     <label for="confirmPassword" class="form-label">Xác nhận
                                         mật khẩu</label> <input type="password" class="form-control"
                                         id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
-                                    <div id="passwordError" class="text-danger"
-                                        style="display: none;">Mật khẩu không khớp</div>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="terms">
@@ -74,20 +72,23 @@
         <%@ include file="/common/linksctrip.jsp"%>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <script>
-        document.getElementById('registrationForm').onsubmit = function(event) {
-            var password = document.getElementById('password').value;
-            var confirmPassword = document.getElementById('confirmPassword').value;
-            var passwordError = document.getElementById('passwordError');
+        $(document).ready(function() {
+            $('#registrationForm').submit(function(event) {
+                var password = $('#password').val();
+                var confirmPassword = $('#confirmPassword').val();
 
-            if (password !== confirmPassword) {
-                passwordError.style.display = 'block';
-                event.preventDefault(); 
-            } else {
-                passwordError.style.display = 'none';
-            }
-        };
+                if (password !== confirmPassword) {
+                    event.preventDefault(); 
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Mật khẩu không khớp!'
+                    });
+                }
+            });
+        });
     </script>
-    
 </body>
 </html>
